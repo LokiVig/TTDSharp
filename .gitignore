@@ -1,0 +1,12 @@
+# Basic VS22 files
+*.vsidx
+obj/*
+build/*
+.vs/*
+
+# Ignore specific files
+*.user
+*.pubxml
+
+# Ignore intermediate files
+OpenTTD/obj/*
