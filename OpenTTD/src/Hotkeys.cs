@@ -182,7 +182,7 @@ public struct HotkeyList
         SaveLoadHotkeys( true );
     }
 
-    public static void HandleGlobalHotkeys( char key, ushort keycode )
+    public static void HandleGlobalHotkeys( sbyte key, ushort keycode )
     {
         foreach ( HotkeyList list in hotkeyLists )
         {

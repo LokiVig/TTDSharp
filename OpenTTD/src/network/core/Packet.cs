@@ -270,7 +270,7 @@ public struct Packet
         }
 
         Debug.Assert( pos < buffer.Length );
-        Debug.Assert( pos + amount <= buffer.Length );
+        Debug.Assert( ( pos + amount ) <= buffer.Length );
 
         byte[] inputBuffer = buffer[pos..( pos + amount )];
         dynamic bytes = transferFunction( source, inputBuffer, amount );

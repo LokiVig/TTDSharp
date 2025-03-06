@@ -42,24 +42,14 @@ public static partial class Network
 {
     public static ServerNetworkGameSocketHandler NetworkClientSocket;
 
-    public static uint frameCounterServer; // The frameCounter of the server, if in network-code
-    public static uint frameCounterMax; // To where we may go with our clients
-    public static uint frameCounter;
-
-    public static uint lastSyncFrame; // Used in the server to store the last time a sync packet was sent to clients
-
-    public static NetworkAddressList broadcastList;
-
-    public static uint syncSeed1;
-    public static uint syncSeed2;
-    public static uint syncFrame;
-    public static bool networkFirstTime;
-
     public static NetworkJoinStatus networkJoinStatus;
+    
     public static byte networkJoinWaiting;
     public static uint networkJoinBytes;
     public static uint networkJoinBytesTotal;
+
     public static ConnectionType networkServerConnectionType;
+    
     public static string networkServerInviteCode;
 
     public static string networkServerName;
