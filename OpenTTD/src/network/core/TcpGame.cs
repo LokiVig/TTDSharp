@@ -118,7 +118,7 @@ public class NetworkGameSocketHandler : NetworkTCPSocketHandler
 
     protected NetworkRecvStatus ReceiveInvalidPacket( PacketGameType type )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
@@ -127,7 +127,7 @@ public class NetworkGameSocketHandler : NetworkTCPSocketHandler
     /// <param name="p">The packet that was just received.</param>
     protected virtual NetworkRecvStatus ReceiveServerFull( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
@@ -136,33 +136,33 @@ public class NetworkGameSocketHandler : NetworkTCPSocketHandler
     /// <param name="p">The packet that we just received.</param>
     protected virtual NetworkRecvStatus ReceiveServerBanned( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
 
     /// <summary>
     /// Try to join the server:<br/>
-    /// <see langword="string"/> OpenTTD revision (norev0000 if no revision).<br/>
-    /// <see langword="uint"/> NewGRF version (added in 1.2).<br/>
-    /// <see langword="string"/> Name of the client (max <see cref="Config.NETWORK_NAME_LENGTH"/>) (removed in 15).<br/>
-    /// <see langword="byte"/> ID of the company to play as (1..<see cref="MAX_COMPANIES"/>) (removed in 15).<br/>
-    /// <see langword="byte"/> ID of the client's language (removed in 15).<br/>
-    /// <see langword="string"/> Client's unique identifier (removed in 1.0).
+    /// <see langword="string"/> - OpenTTD revision (norev0000 if no revision).<br/>
+    /// <see langword="uint"/> - NewGRF version (added in 1.2).<br/>
+    /// <see langword="string"/> - Name of the client (max <see cref="Config.NETWORK_NAME_LENGTH"/>) (removed in 15).<br/>
+    /// <see langword="byte"/> - ID of the company to play as (1..<see cref="MAX_COMPANIES"/>) (removed in 15).<br/>
+    /// <see langword="byte"/> - ID of the client's language (removed in 15).<br/>
+    /// <see langword="string"/> - Client's unique identifier (removed in 1.0).
     /// </summary>
     /// <param name="p">The packet that was just received.</param
     protected virtual NetworkRecvStatus ReceiveClientJoin( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
     /// The client made an error:<br/>
-    /// <see langword="byte"/> Error code caused (see <see cref="NetworkErrorCode"/>).
+    /// <see langword="byte"/> - Error code caused (see <see cref="NetworkErrorCode"/>).
     /// </summary>
     /// <param name="p">The packet that was just received.</param>
     protected virtual NetworkRecvStatus ReceiveServerError( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
@@ -171,7 +171,7 @@ public class NetworkGameSocketHandler : NetworkTCPSocketHandler
     /// <param name="p">The packet that was just received.</param>
     protected virtual NetworkRecvStatus ReceiveClientGameInfo( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
@@ -181,76 +181,76 @@ public class NetworkGameSocketHandler : NetworkTCPSocketHandler
     /// <param name="p">The packet that was just received.</param>
     protected virtual NetworkRecvStatus ReceiveServerGameInfo( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
     /// Send information about a client:<br/>
-    /// <see langword="uint"/> ID of the client (always unique on a server. 1 = server, 0 is invalid).<br/>
-    /// <see langword="byte"/> ID of the company the client is playing as (255 for spectators).<br/>
-    /// <see langword="string"/> Name of the client.<br/>
-    /// <see langword="string"/> Public key of the client.
+    /// <see langword="uint"/> - ID of the client (always unique on a server. 1 = server, 0 is invalid).<br/>
+    /// <see langword="byte"/> - ID of the company the client is playing as (255 for spectators).<br/>
+    /// <see langword="string"/> - Name of the client.<br/>
+    /// <see langword="string"/> - Public key of the client.
     /// </summary>
     /// <param name="p">The packet that was just received.</param>
     protected virtual NetworkRecvStatus ReceiveServerClientInfo( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
     /// The client tells the server about the identity of the client:<br/>
-    /// <see langword="string"/> Name of the client (max <see cref="Config.NETWORK_CLIENT_NAME_LENGTH"/>).<br/>
-    /// <see langword="byte"/> ID of the company to play as (1..<see cref="MAX_COMPANIES"/>, or <see cref="COMPANY_SPECTATOR"/>).
+    /// <see langword="string"/> - Name of the client (max <see cref="Config.NETWORK_CLIENT_NAME_LENGTH"/>).<br/>
+    /// <see langword="byte"/> - ID of the company to play as (1..<see cref="MAX_COMPANIES"/>, or <see cref="COMPANY_SPECTATOR"/>).
     /// </summary>
     /// <param name="p">The packet that was just received.</param>
     protected virtual NetworkRecvStatus ReceiveClientIdentify( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
     /// Indication to the client that it needs to authenticate:<br/>
     /// <see langword="byte"/> The <see cref="NetworkAuthenticationMethod"/> to use.<br/>
-    /// 32 * <see langword="byte"/> Public key of the server.<br/>
-    /// 24 * <see langword="byte"/> Nonce for the key exchange.
+    /// 32 * <see langword="byte"/> - Public key of the server.<br/>
+    /// 24 * <see langword="byte"/> - Nonce for the key exchange.
     /// </summary>
     /// <param name="p">The packet that was just received.</param>
     protected virtual NetworkRecvStatus ReceiveServerAuthRequest( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
     /// Send the response to the authentication request:<br/>
-    /// 32 * <see langword="byte"/> Public key of the client.<br/>
-    /// 16 * <see langword="byte"/> Message authentication code.<br/>
-    ///  8 * <see langword="byte"/> Random message that got encoded and signed.
+    /// 32 * <see langword="byte"/> - Public key of the client.<br/>
+    /// 16 * <see langword="byte"/> - Message authentication code.<br/>
+    ///  8 * <see langword="byte"/> - Random message that got encoded and signed.
     /// </summary>
     /// <param name="p">The packet that was just received.</param>
     protected virtual NetworkRecvStatus ReceiveClientAuthResponse( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
     /// Indication to the client that authentication is complete and encryption has to be used from here on forward.<br/>
     /// The encryption uses the shared keys generated by the last <see cref="AUTH_REQUEST"/> key exchange.<br/>
-    /// 24 * <see langword="byte"/> Nonce for encrypted connection.
+    /// 24 * <see langword="byte"/> - Nonce for encrypted connection.
     /// </summary>
     /// <param name="p">The packet that was just received.</param>
     protected virtual NetworkRecvStatus ReceiveServerEnableEncryption( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
     /// The client is joined and ready to receive their map:<br/>
-    /// <see langword="uint"/> Own client ID.
+    /// <see langword="uint"/> - Own client ID.
     /// </summary>
     /// <param name="p">The packet that was just received.</param>
     protected virtual NetworkRecvStatus ReceiveServerWelcome( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
@@ -259,37 +259,37 @@ public class NetworkGameSocketHandler : NetworkTCPSocketHandler
     /// <param name="p">The packet that was just received.</param>
     protected virtual NetworkRecvStatus ReceiveClientGetMap( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
     /// Notification that another client is currently receiving the map:<br/>
-    /// <see langword="byte"/> Number of clients waiting in front of you.
+    /// <see langword="byte"/> - Number of clients waiting in front of you.
     /// </summary>
     /// <param name="p">The packet that was just received.</param
     protected virtual NetworkRecvStatus ReceiveServerWait( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
     /// Sends that the server will begin with sending the map to the client:<br/>
-    /// <see langword="uint"/> Current frame.
+    /// <see langword="uint"/> - Current frame.
     /// </summary>
     /// <param name="p">The packet that was just received.</param>
     protected virtual NetworkRecvStatus ReceiveServerMapBegin( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
     /// Sends the size of the map to the client.<br/>
-    /// <see langword="uint"/> Size of the (compressed) map (in bytes).
+    /// <see langword="uint"/> - Size of the (compressed) map (in bytes).
     /// </summary>
     /// <param name="p">The packet that was just received.</param>
     protected virtual NetworkRecvStatus ReceiveServerMapSize( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
@@ -299,7 +299,7 @@ public class NetworkGameSocketHandler : NetworkTCPSocketHandler
     /// <param name="p">The packet that was just received.</param>
     protected virtual NetworkRecvStatus ReceiveServerMapData( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
     }
 
     /// <summary>
@@ -308,6 +308,88 @@ public class NetworkGameSocketHandler : NetworkTCPSocketHandler
     /// <param name="p">The packet that was just received.</param>
     protected virtual NetworkRecvStatus ReceiveServerMapDone( Packet p )
     {
-        return NetworkRecvStatus.Okay;
+        return NetworkRecvStatus.ServerError;
+    }
+
+    /// <summary>
+    /// Tell the server that we are done receiving / loading the map.
+    /// </summary>
+    /// <param name="p">The packet that was just received.</param>
+    protected virtual NetworkRecvStatus ReceiveClientMapOk( Packet p )
+    {
+        return NetworkRecvStatus.ServerError;
+    }
+
+    /// <summary>
+    /// A client joined (<see cref="PacketGameType.ClientMapOk"/>), what usually directly follows is a <see cref="PacketGameType.ServerClientInfo"/>:<br/>
+    /// <see langword="uint"/> - ID of the client that just joined the game.
+    /// </summary>
+    /// <param name="p">The packet that was just received.</param>
+    protected virtual NetworkRecvStatus ReceiveServerJoin( Packet p )
+    {
+        return NetworkRecvStatus.ServerError;
+    }
+
+    /// <summary>
+    /// Sends the current frame counter to the client:<br/>
+    /// <see langword="uint"/> - Frame counter.<br/>
+    /// <see langword="uint"/> - Frame counter max (how far may the client walk before the server?).<br/>
+    /// <see langword="uint"/> - General seed 1 (dependent on compile settings, not default).<br/>
+    /// <see langword="uint"/> - General seed 2 (dependent on compile settings, not default).<br/>
+    /// <see langword="byte"/> - Random token to validate the client is actually listening (only occasionally present).
+    /// </summary>
+    /// <param name="p">The packet that was just received.</param>
+    protected virtual NetworkRecvStatus ReceiveServerFrame( Packet p )
+    {
+        return NetworkRecvStatus.ServerError;
+    }
+
+    /// <summary>
+    /// Sends a sync-check to the client:<br/>
+    /// <see langword="uint"/> - Frame counter.<br/>
+    /// <see langword="uint"/> - General seed 1.<br/>
+    /// <see langword="uint"/> - General seed 2 (dependent on compile settings, not default).
+    /// </summary>
+    /// <param name="p">The packet that was just received.</param>
+    protected virtual NetworkRecvStatus ReceiveServerSync( Packet p )
+    {
+        return NetworkRecvStatus.ServerError;
+    }
+
+    /// <summary>
+    /// Tell the server we are done with this frame:<br/>
+    /// <see langword="uint"/> - Current frame counter of the client.<br/>
+    /// <see langword="byte"/> - The random token that the server sent in the <see cref="PacketGameType.ServerFrame"/> packet.
+    /// </summary>
+    /// <param name="p">The packet that was just received.</param>
+    protected virtual NetworkRecvStatus ReceiveClientAck( Packet p )
+    {
+        return NetworkRecvStatus.ServerError;
+    }
+
+    /// <summary>
+    /// Send a DoCommand to the Server:<br/>
+    /// <see langword="byte"/> - ID of the company (0..<see cref="MAX_COMPANIES"/>-1).<br/>
+    /// <see langword="uint"/> - ID of the command (see Command.cs).<br/>
+    /// &lt;var&gt; - Command specific buffer with encoded parameters of variable length.<br/>
+    /// The content differs per command and can change without notification.
+    /// </summary>
+    /// <param name="p">The packet that was just received.</param>
+    protected virtual NetworkRecvStatus ReceiveClientCommand( Packet p )
+    {
+        return NetworkRecvStatus.ServerError;
+    }
+
+    /// <summary>
+    /// Sends a DoCommand to the client:<br/>
+    /// <see langword="byte"/> - ID of the company (0..<see cref="MAX_COMPANIES"/>-1).<br/>
+    /// <see langword="uint"/> - ID of the command (see Command.cs).<br/>
+    /// &lt;var&gt; - Command specific buffer with encoded parameters of variable length.<br/>
+    /// The content differs per command and can change without notification.
+    /// </summary>
+    /// <param name="p">The packet that was just received.</param>
+    protected virtual NetworkRecvStatus ReceiveServerCommand( Packet p )
+    {
+
     }
 }

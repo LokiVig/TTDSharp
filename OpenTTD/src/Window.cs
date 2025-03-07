@@ -125,7 +125,7 @@ public enum WindowClassEnum : ushort
     /// <summary>
     /// Tooltip window; Window numbers:
     /// <list type="bullet">
-    ///     <item> = <see cref="ToolTipsWidgets"/></item>
+    ///     <item>0 = <see cref="ToolTipsWidgets"/></item>
     /// </list>
     /// </summary>
     ToolTips,

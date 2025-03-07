@@ -51,9 +51,9 @@ public struct Hotkey
     /// </summary>
     /// <param name="hotkey">The hotkey object to add the keycodes to.</param>
     /// <param name="value">The string to parse.</param>
-    public static void ParseHotkeys( Hotkey hotkey, char[] value )
+    public static void ParseHotkeys( Hotkey hotkey, string value )
     {
-        char[] start = value;
+        char[] start = value.ToCharArray();
         int startIndex = 0;
 
         while ( start[startIndex] != '\0' )
@@ -66,7 +66,7 @@ public struct Hotkey
                 endIndex++;
             }
 
-            ushort keycode = ParseKeycode( start, end );
+            ushort keycode = KeycodeNames.ParseKeycode( start, end );
 
             if ( keycode != 0 )
             {
