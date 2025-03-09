@@ -143,7 +143,7 @@ public class ServerNetworkUDPSocketHandler : NetworkUDPSocketHandler
 {
     protected override void Receive_CLIENT_FIND_SERVER( Packet p, NetworkAddress clientAddr )
     {
-        Packet packet = new Packet(this, PACKET_UDP_SERVER_RESPONSE)
+        Packet packet = new Packet( this, PACKET_UDP_SERVER_RESPONSE );
     }
 
     public ServerNetworkUDPSocketHandler( NetworkAddressList addresses ) 

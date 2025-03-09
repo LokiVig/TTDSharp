@@ -40,7 +40,7 @@ public struct CommandPacket
 
 public static partial class Network
 {
-    public static ServerNetworkGameSocketHandler NetworkClientSocket;
+    public static ServerNetworkGameSocketHandler networkClientSocket;
 
     public static NetworkJoinStatus networkJoinStatus;
     

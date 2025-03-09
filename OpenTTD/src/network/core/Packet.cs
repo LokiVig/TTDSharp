@@ -51,12 +51,12 @@ public struct Packet
 
     }
 
-    public static dynamic EncodedLengthOfPacketSize()
+    public static ulong EncodedLengthOfPacketSize()
     {
         return sizeof( PacketSize );
     }
 
-    public static dynamic EncodedLengthOfPacketType()
+    public static ulong EncodedLengthOfPacketType()
     {
         return sizeof( PacketType );
     }
@@ -66,7 +66,7 @@ public struct Packet
 
     }
 
-    public bool CanWriteToPacket( dynamic bytesToWrite )
+    public bool CanWriteToPacket( ulong bytesToWrite )
     {
 
     }
@@ -121,7 +121,7 @@ public struct Packet
 
     }
 
-    public dynamic Size()
+    public ulong Size()
     {
 
     }
@@ -136,7 +136,7 @@ public struct Packet
 
     }
 
-    public bool CanReadFromPacket( dynamic bytesToRead, bool closeConnection = false )
+    public bool CanReadFromPacket( ulong bytesToRead, bool closeConnection = false )
     {
 
     }
@@ -171,17 +171,17 @@ public struct Packet
 
     }
 
-    public dynamic RecvBytes( byte[] span )
+    public ulong RecvBytes( byte[] span )
     {
 
     }
 
-    public string RecvString( dynamic length, StringValidationSettings settings = StringValidationSettings.ReplaceWithQuestionMark )
+    public string RecvString( ulong length, StringValidationSettings settings = StringValidationSettings.ReplaceWithQuestionMark )
     {
 
     }
 
-    public dynamic RemainingBytesToTransfer()
+    public ulong RemainingBytesToTransfer()
     {
 
     }
@@ -189,7 +189,7 @@ public struct Packet
     /// <summary>
     /// Transfer data from the packet to the given function. It starts reading at the<br/>
     /// position the last transfer stopped.<br/>
-    /// See <see cref="TransferIn{T}(Func{T, PacketType[], dynamic, dynamic}, T)"/> for more information about transferring data to functions.
+    /// See <see cref="TransferIn{T}(Func{T, PacketType[], ulong, ulong}, T)"/> for more information about transferring data to functions.
     /// </summary>
     /// <param name="transferFunction">The function to pass the buffer as second parameter and the<br/>
     ///                                amount to write as the third parameter. It returns the amount that<br/>
@@ -198,9 +198,9 @@ public struct Packet
     /// <param name="destination">The first parameter of <paramref name="transferFunction"/>.</param>
     /// <param name="args">The fourth and further parameters to the <paramref name="transferFunction"/>, if any.</param>
     /// <returns>The return value of the <paramref name="transferFunction"/>.</returns>
-    public dynamic TransferOutWithLimit<T>( Func<T, byte[], dynamic, dynamic> transferFunction, long limit, T destination )
+    public long TransferOutWithLimit<T>( Func<T, byte[], ulong, ulong> transferFunction, long limit, T destination )
     {
-        dynamic amount = Math.Min( RemainingBytesToTransfer(), limit );
+        ulong amount = Math.Min( RemainingBytesToTransfer(), limit );
         
         if ( amount == 0 )
         {
@@ -208,10 +208,10 @@ public struct Packet
         }
 
         Debug.Assert( pos < buffer.Length );
-        Debug.Assert( pos + amount <= buffer.Length );
+        Debug.Assert( (int)(pos + amount) <= buffer.Length );
 
-        byte[] outputBuffer = buffer[pos..( pos + amount )];
-        long bytes = transferFunction( destination, outputBuffer, amount );
+        byte[] outputBuffer = buffer[pos..(int)( pos + amount )];
+        long bytes = (long)transferFunction( destination, outputBuffer, amount );
 
         if ( bytes > 0 )
         {
@@ -231,7 +231,7 @@ public struct Packet
     ///                                was written or -1 upon errors.</param>
     /// <param name="destination">The first parameter of the <paramref name="transferFunction"/>.</param>
     /// <returns></returns>
-    public dynamic TransferOut<T>( Func<T, byte[], dynamic, dynamic> transferFunction, T destination )
+    public long TransferOut<T>( Func<T, byte[], ulong, ulong> transferFunction, T destination )
     {
         return TransferOutWithLimit( transferFunction, long.MaxValue, destination );
     }
@@ -260,9 +260,9 @@ public struct Packet
     ///                                was read or -1 upon errors.</param>
     /// <param name="source">The first parameter of the <paramref name="transferFunction"/>.</param>
     /// <returns>The return value of the <paramref name="transferFunction"/>.</returns>
-    public dynamic TransferIn<T>( Func<T, byte[], dynamic, dynamic> transferFunction, T source )
+    public long TransferIn<T>( Func<T, byte[], ulong, ulong> transferFunction, T source )
     {
-        dynamic amount = RemainingBytesToTransfer();
+        ulong amount = RemainingBytesToTransfer();
 
         if ( amount == 0 )
         {
@@ -270,16 +270,16 @@ public struct Packet
         }
 
         Debug.Assert( pos < buffer.Length );
-        Debug.Assert( ( pos + amount ) <= buffer.Length );
+        Debug.Assert( (int)( pos + amount ) <= buffer.Length );
 
-        byte[] inputBuffer = buffer[pos..( pos + amount )];
-        dynamic bytes = transferFunction( source, inputBuffer, amount );
+        byte[] inputBuffer = buffer[pos..(int)( pos + amount )];
+        ulong bytes = transferFunction( source, inputBuffer, amount );
 
         if ( bytes > 0 )
         {
-            pos += bytes;
+            pos += (ushort)bytes;
         }
 
-        return bytes;
+        return (long)bytes;
     }
 }

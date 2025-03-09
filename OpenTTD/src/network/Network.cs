@@ -39,6 +39,6 @@ public static partial class Network
 
     public static bool HasClients()
     {
-        return !NetworkClientSocket.Empty();
+        return !networkClientSocket.Empty();
     }
 }
