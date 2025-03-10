@@ -196,7 +196,6 @@ public struct Packet
     ///                                was written or -1 upon errors.</param>
     /// <param name="limit">The maximum amount of bytes to transfer.</param>
     /// <param name="destination">The first parameter of <paramref name="transferFunction"/>.</param>
-    /// <param name="args">The fourth and further parameters to the <paramref name="transferFunction"/>, if any.</param>
     /// <returns>The return value of the <paramref name="transferFunction"/>.</returns>
     public long TransferOutWithLimit<T>( Func<T, byte[], ulong, ulong> transferFunction, long limit, T destination )
     {

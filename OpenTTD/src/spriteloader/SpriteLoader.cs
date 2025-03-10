@@ -1,5 +1,5 @@
 ﻿global using SpriteCollection = OpenTTD.SpriteLoader.SpriteLoader.Sprite[];
-global using SpriteComponents = OpenTTD.Core.EnumBitSet<OpenTTD.SpriteLoader.SpriteComponent, byte>;
+global using SpriteComponents = OpenTTD.Core.EnumBitSet<OpenTTD.SpriteLoader.SpriteComponent, byte, byte>;
 
 using System;
 using System.Runtime.CompilerServices;
