@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Net.Sockets;
+using System.Runtime.InteropServices;
+
+using OpenTTD.OS.Windows;
 
 namespace OpenTTD.Network.Core;
 
@@ -21,9 +24,24 @@ public class NetworkError
         this.error = error;
     }
 
+    /// <summary>
+    /// Construct the network error with the given error code and message.
+    /// </summary>
+    /// <param name="error">The error code.</param>
+    /// <param name="message">The error message. Leave empty to determine this automatically based on the error number.</param>
+    public NetworkError( int error, string message )
+    {
+        this.error = error;
+        this.message = message;
+    }
+
+    /// <summary>
+    /// Check whether an error was actually set.
+    /// </summary>
+    /// <returns><see langword="true"/> if an error was set.</returns>
     public bool HasError()
     {
-
+        return error != 0;
     }
 
     /// <summary>
@@ -32,7 +50,7 @@ public class NetworkError
     /// <returns><see langword="true"/> if the operation would block.</returns>
     public bool WouldBlock()
     {
-        throw new NotImplementedException( "This function uses hard-coded variables from both Win32 and POSIX that, afaik, C# doesn't have as much access to. Whoopsies!" );
+        return error == WindowsSocketsErrorCodes.WSAEWOULDBLOCK;
     }
 
     /// <summary>
@@ -61,13 +79,19 @@ public class NetworkError
     {
         if ( string.IsNullOrEmpty( message ) )
         {
-
+            message = $"Unknown error {error}";
         }
+
+        return message;
     }
 
+    /// <summary>
+    /// Get the last network error.
+    /// </summary>
+    /// <returns>The network error.</returns>
     public static NetworkError GetLast()
     {
-
+        return new NetworkError(Marshal.GetLastWin32Error());
     }
 }
 
@@ -98,23 +122,52 @@ public static partial class NetworkCore
         }
     }
 
+    /// <summary>
+    /// Try to set the socket into non-blocking mode.
+    /// </summary>
+    /// <param name="d">The socket to set the non-blocking mode for.</param>
+    /// <returns><see langword="true"/> if setting the non-blocking mode succeeded, otherwise <see langword="false"/>.</returns>
     public static bool SetNonBlocking( Socket d )
     {
-
+        return d.Blocking = false;
     }
 
+    /// <summary>
+    /// Try to set the socket to not delay sending.
+    /// </summary>
+    /// <param name="d">The socket to disable the delaying for.</param>
+    /// <returns><see langword="true"/> if disabling the delaying succeeded, otherwise <see langword="false"/>.</returns>
     public static bool SetNoDelay( Socket d )
     {
-
+        return d.NoDelay = true;
     }
 
+    /// <summary>
+    /// Try to set the socket to reuse ports.
+    /// </summary>
+    /// <param name="d">The socket to reuse ports on.</param>
+    /// <returns><see langword="true"/> if enabling the reusing succeeded, otherwise <see langword="false"/>.</returns>
     public static bool SetReusePort( Socket d )
     {
+        d.SetSocketOption( SocketOptionLevel.Socket, SocketOptionName.ReuseAddress, true );
 
+        return d.GetSocketOption( SocketOptionLevel.Socket, SocketOptionName.ReuseAddress ) != null;
     }
 
+    /// <summary>
+    /// Get the error from a socket, if any.
+    /// </summary>
+    /// <param name="d">The socket to get the error from.</param>
+    /// <returns>A <see cref="NetworkError"/> from the socket.</returns>
     public static NetworkError GetSocketError( Socket d )
     {
-
+        if ( d.GetSocketOption( SocketOptionLevel.Socket, SocketOptionName.Error ) is int error )
+        {
+            return new NetworkError( error );
+        }
+        else
+        {
+            return new NetworkError( -1, "Couldn't get error for socket." );
+        }
     }
 }
