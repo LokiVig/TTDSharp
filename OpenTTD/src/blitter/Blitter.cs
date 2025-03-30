@@ -149,7 +149,7 @@ public class Blitter : SpriteEncoder
 
     /// <summary>
     /// Copy from a buffer to the screen.<br/>
-    /// Note: You can not do anything with the content of this buffer, as the blitter can store non-pixel data in it too!
+    /// <b>NOTE:</b> You can not do anything with the content of this buffer, as the blitter can store non-pixel data in it too!
     /// </summary>
     /// <param name="video">The destination object (video-buffer).</param>
     /// <param name="src">The buffer from which the data will be read.</param>
@@ -162,7 +162,7 @@ public class Blitter : SpriteEncoder
 
     /// <summary>
     /// Copy from the screen to a buffer.<br/>
-    /// Note: You can not do anything with the content of this buffer, as the blitter can store non-pixel data in it too!
+    /// <b>NOTE:</b> You can not do anything with the content of this buffer, as the blitter can store non-pixel data in it too!
     /// </summary>
     /// <param name="video">The destination object (video-buffer).</param>
     /// <param name="dst">The buffer in which the data will be stored.</param>

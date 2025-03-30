@@ -92,7 +92,7 @@ public class NetworkTCPSocketHandler : NetworkSocketHandler
 /// <summary>
 /// "Helper" class for creating TCP connections in a non-blocking manner.
 /// </summary>
-public class TCPConnecter
+public class TCPConnector
 {
     /// <summary>
     /// The current status of the connecter.<br/>

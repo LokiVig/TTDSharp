@@ -240,7 +240,7 @@ public class NetworkAddress
 
     /// <summary>
     /// Checks whether this IP address is contained by the given netmask.<br/>
-    /// NOTE: Netmask without /n assumes all bits need to match.
+    /// <b>NOTE:</b> Netmask without /n assumes all bits need to match.
     /// </summary>
     /// <param name="netmask">The netmask in CIDR notation to test against.</param>
     /// <returns><see langword="true"/> if the IP is within the <paramref name="netmask"/>.</returns>
@@ -376,7 +376,7 @@ public class NetworkAddress
 
     /// <summary>
     /// Convert the socket type into a string.<br/>
-    /// NOTE: Only works for <see cref="SocketType.Stream"/> and <see cref="SocketType.Dgram"/>.
+    /// <b>NOTE:</b> Only works for <see cref="SocketType.Stream"/> and <see cref="SocketType.Dgram"/>.
     /// </summary>
     /// <param name="socktype">The socket type to convert.</param>
     /// <returns>The string representation.</returns>
@@ -397,7 +397,7 @@ public class NetworkAddress
 
     /// <summary>
     /// Convert the address family into a string.<br/>
-    /// NOTE: Only works for <see cref="AddressFamily.InterNetwork"/>, <see cref="AddressFamily.InterNetworkV6"/> and <see cref="AddressFamily.Unspecified"/>.
+    /// <b>NOTE:</b> Only works for <see cref="AddressFamily.InterNetwork"/>, <see cref="AddressFamily.InterNetworkV6"/> and <see cref="AddressFamily.Unspecified"/>.
     /// </summary>
     /// <param name="family">The family to convert.</param>
     /// <returns>The string representation.</returns>

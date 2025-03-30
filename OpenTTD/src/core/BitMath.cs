@@ -33,8 +33,8 @@ public static class BitMath
     /// This is not a bug, it's a feature.<br/>
     /// <br/>
     /// <para>
-    ///     Note: Parameter <paramref name="x"/> must be a variable as the result is saved there.<br/>
-    ///     Note: To avoid unexpected results the value of <paramref name="d"/> should not use more space<br/>
+    ///     <b>NOTE:</b> Parameter <paramref name="x"/> must be a variable as the result is saved there.<br/>
+    ///     <b>NOTE:</b> To avoid unexpected results the value of <paramref name="d"/> should not use more space<br/>
     ///           as the provided space of <paramref name="n"/> bits (log2).
     /// </para>
     /// </summary>
@@ -58,7 +58,7 @@ public static class BitMath
     /// as the result are saved there. An overflow does not affect the following bits of the given bit window and is simply ignored.<br/>
     /// <br/>
     /// <para>
-    ///     Note: Parameter <paramref name="x"/> must be a variable as the result is saved there.
+    ///     <b>NOTE:</b> Parameter <paramref name="x"/> must be a variable as the result is saved there.
     /// </para>
     /// </summary>
     /// <param name="x">The variable to add some bits at some position.</param>

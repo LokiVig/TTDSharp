@@ -47,8 +47,8 @@ public static class Alloc
     /// type.<br/>
     /// <br/>
     /// <para>
-    ///     Note: Throws an error when there is no memory anymore.<br/>
-    ///     Note: The memory contains garbage data (i.e. possibly non-zero values).
+    ///     <b>NOTE:</b> Throws an error when there is no memory anymore.<br/>
+    ///     <b>NOTE:</b> The memory contains garbage data (i.e. possibly non-zero values).
     /// </para>
     /// </summary>
     /// <typeparam name="T">The type of the variable(s) to allocate.</typeparam>
@@ -91,8 +91,8 @@ public static class Alloc
     /// type.<br/>
     /// <br/>
     /// <para>
-    ///     Note: Throws an error when there is no memory anymore.<br/>
-    ///     Note: The memory contains all zero values.
+    ///     <b>NOTE:</b> Throws an error when there is no memory anymore.<br/>
+    ///     <b>NOTE:</b> The memory contains all zero values.
     /// </para>
     /// </summary>
     /// <typeparam name="T">The type of the variable(s) to allocation.</typeparam>
@@ -127,8 +127,8 @@ public static class Alloc
     /// type. It extends / shrinks the memory allocation given in <paramref name="tPtr"/>.<br/>
     /// <br/>
     /// <para>
-    ///     Note: Throws an error when there is no memory anymore.<br/>
-    ///     Note: The pointer to the data may change, but the data will remain valid.
+    ///     <b>NOTE:</b> Throws an error when there is no memory anymore.<br/>
+    ///     <b>NOTE:</b> The pointer to the data may change, but the data will remain valid.
     /// </para>
     /// </summary>
     /// <typeparam name="T">The type of the variable(s) to allocation.</typeparam>
@@ -202,8 +202,8 @@ public class ReusableBuffer<T>
     /// Get buffer of at least count times T.<br/>
     /// <br/>
     /// <para>
-    ///     Note: The buffer might be bigger.<br/>
-    ///     Note: Calling this function invalidates any previous buffers given.<br/>
+    ///     <b>NOTE:</b> The buffer might be bigger.<br/>
+    ///     <b>NOTE:</b> Calling this function invalidates any previous buffers given.<br/>
     /// </para>
     /// </summary>
     /// <param name="count">The minimum buffer size.</param>
@@ -224,8 +224,8 @@ public class ReusableBuffer<T>
     /// Get buffer of at least count times T with zeroed memory.<br/>
     /// <br/>
     /// <para>
-    ///     Note: The buffer might be bigger.<br/>
-    ///     Note: Calling this function invalidates any previous buffers given.<br/>
+    ///     <b>NOTE:</b> The buffer might be bigger.<br/>
+    ///     <b>NOTE:</b> Calling this function invalidates any previous buffers given.<br/>
     /// </para>
     /// </summary>
     /// <param name="count">The minimum buffer size.</param>

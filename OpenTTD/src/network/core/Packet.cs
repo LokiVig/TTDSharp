@@ -199,7 +199,7 @@ public struct Packet
     /// <returns>The return value of the <paramref name="transferFunction"/>.</returns>
     public long TransferOutWithLimit<T>( Func<T, byte[], ulong, ulong> transferFunction, long limit, T destination )
     {
-        ulong amount = Math.Min( RemainingBytesToTransfer(), limit );
+        ulong amount = Math.Min( RemainingBytesToTransfer(), (ulong)limit );
         
         if ( amount == 0 )
         {
@@ -223,7 +223,7 @@ public struct Packet
     /// <summary>
     /// Transfer data from the packet to the given function. It starts reading at the<br/>
     /// position the last transfer stopped.<br/>
-    /// See <see cref="TransferIn{T}(Func{T, PacketType[], dynamic, dynamic}, T)"/> for more information about transferring data to functions.
+    /// See <see cref="TransferIn{T}(Func{T, PacketType[], ulong, ulong}, T)"/> for more information about transferring data to functions.
     /// </summary>
     /// <param name="transferFunction">The function to pass the buffer as second parameter and the amount<br/>
     ///                                to write as the third parameter. It returns the amount that<br/>

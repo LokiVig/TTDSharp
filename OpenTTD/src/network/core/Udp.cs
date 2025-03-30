@@ -160,7 +160,7 @@ public class NetworkUDPSocketHandler : NetworkSocketHandler
         {
             // Make a local copy of because if we resolve it we cannot
             // easily unresolve it so we can resolve it later again
-            NetworkAddress send = new NetworkAddress( recv );
+            NetworkAddress send = recv;
 
             // Not the same type
             if ( !send.IsFamily( s.second.GetAddress().ssFamily ) )

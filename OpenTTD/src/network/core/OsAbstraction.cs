@@ -50,7 +50,7 @@ public class NetworkError
     /// <returns><see langword="true"/> if the operation would block.</returns>
     public bool WouldBlock()
     {
-        return error == WindowsSocketsErrorCodes.WSAEWOULDBLOCK;
+        return error == WSErrorCodes.WSAEWOULDBLOCK;
     }
 
     /// <summary>
@@ -59,7 +59,7 @@ public class NetworkError
     /// <returns><see langword="true"/> if the connection is reset.</returns>
     public bool IsConnectionReset()
     {
-        throw new NotImplementedException( "This function uses hard-coded variables from both Win32 and POSIX that, afaik, C# doesn't have as much access to. Whoopsies!" );
+        return error == WSErrorCodes.WSAECONNRESET;
     }
 
     /// <summary>
@@ -68,7 +68,7 @@ public class NetworkError
     /// <returns><see langword="true"/> if the connect is already in progress.</returns>
     public bool IsConnectInProgress()
     {
-        throw new NotImplementedException( "This function uses hard-coded variables from both Win32 and POSIX that, afaik, C# doesn't have as much access to. Whoopsies!" );
+        return error == WSErrorCodes.WSAEWOULDBLOCK;
     }
 
     /// <summary>

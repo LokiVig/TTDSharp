@@ -42,18 +42,16 @@ public enum ClientID : uint
     First = 2, // The first client ID
 }
 
-public struct NetworkCompanyStats
+public class NetworkCompanyStats
 {
     public ushort[] numVehicles = new ushort[(int)NetworkVehicleType.End]; // How many vehicles are there of this type?
     public ushort[] numStations = new ushort[(int)NetworkVehicleType.End]; // How many stations are there of this type?
     public bool ai; // Is this company an AI?
-
-    public NetworkCompanyStats() { }
 }
 
 /// <summary>
 /// Destination of our chat messages.<br/>
-/// WARNING: The values of the enum items are part of the admin network API. Only append at the end.
+/// <b>WARNING:</b> The values of the enum items are part of the admin network API. Only append at the end.
 /// </summary>
 public enum DestType : byte
 {
@@ -64,7 +62,7 @@ public enum DestType : byte
 
 /// <summary>
 /// Actions that can be used for <see cref="NetworkTextMessage"/>.<br/>
-/// WARNING: The values of the enum items are part of the admin network API. Only append at the end.
+/// <b>WARNING:</b> The values of the enum items are part of the admin network API. Only append at the end.
 /// </summary>
 public enum NetworkAction : byte
 {
@@ -85,7 +83,7 @@ public enum NetworkAction : byte
 
 /// <summary>
 /// The error codes we send around in the protocols.<br/>
-/// WARNING: The values of the enum items are part of the admin network API. Only append at the end.
+/// <b>WARNING:</b> The values of the enum items are part of the admin network API. Only append at the end.
 /// </summary>
 public enum NetworkErrorCode : byte
 {

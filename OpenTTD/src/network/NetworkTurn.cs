@@ -10,7 +10,7 @@ namespace OpenTTD.Network;
 /// </summary>
 public class ClientNetworkTurnSocketHandler : NetworkTurnSocketHandler
 {
-    public TCPConnecter connecter = null; // Connecter instance
+    public TCPConnector connecter = null; // Connecter instance
     public bool connectStarted = false; // Whether we started the connection
 
     private string token; // Token of this connection
@@ -91,7 +91,7 @@ public class ClientNetworkTurnSocketHandler : NetworkTurnSocketHandler
         Console.WriteLine( "Turn.Connect()" );
 
         connectStarted = true;
-        connecter = TCPConnecter.Create<NetworkTurnConnecter>( this, connectionString );
+        connecter = TCPConnector.Create<NetworkTurnConnecter>( this, connectionString );
     }
 
     public void ConnectFailure()
@@ -122,7 +122,7 @@ public class ClientNetworkTurnSocketHandler : NetworkTurnSocketHandler
 /// <summary>
 /// Connect to the TURN server.
 /// </summary>
-public class NetworkTurnConnecter : TCPConnecter
+public class NetworkTurnConnecter : TCPConnector
 {
     private ClientNetworkTurnSocketHandler handler;
 
