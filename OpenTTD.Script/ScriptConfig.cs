@@ -411,6 +411,6 @@ public class ScriptConfig
     /// </summary>
     protected virtual ScriptInfo FindInfo( string name, int version, bool forceExactMatch )
     {
-
+        return null;
     }
 }

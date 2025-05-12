@@ -13,7 +13,7 @@ public class Squirrel
 {
     private delegate void SQPrintFunc( bool errorMsg, string message );
 
-    private SquirrelVM vm; // The VirtualMachine instance for squirrel
+    private SQVM vm; // The VirtualMachine instance for squirrel
     private object globalPointer; // Can be set by whoever initializes squirrel
     private SQPrintFunc printFunc; // Points to either null, or a custom print handler
     private bool crashed; // True if the squirrel script made an error
@@ -34,7 +34,7 @@ public class Squirrel
     /// <summary>
     /// The internal RunError handler. It looks up the real error and calls <see cref="RunError"/> with it.
     /// </summary>
-    private static SQInteger _RunError( SquirrelVM vm )
+    private static SQInteger _RunError( SQVM vm )
     {
 
     }
@@ -66,7 +66,7 @@ public class Squirrel
     /// <summary>
     /// The CompileError handler.
     /// </summary>
-    protected static void CompileError( SquirrelVM vm, string desc, string source, SQInteger line, SQInteger column )
+    protected static void CompileError( SQVM vm, string desc, string source, SQInteger line, SQInteger column )
     {
 
     }
@@ -74,7 +74,7 @@ public class Squirrel
     /// <summary>
     /// The RunError handler.
     /// </summary>
-    protected static void RunError( SquirrelVM vm, SQString error )
+    protected static void RunError( SQVM vm, SQString error )
     {
 
     }
@@ -82,7 +82,7 @@ public class Squirrel
     /// <summary>
     /// If a user runs 'print' inside a script, this function gets the params.
     /// </summary>
-    protected static void PrintFunc( SquirrelVM vm, string s )
+    protected static void PrintFunc( SQVM vm, string s )
     {
 
     }
@@ -90,7 +90,7 @@ public class Squirrel
     /// <summary>
     /// If an error has to be print, this function is called.
     /// </summary>
-    protected static void ErrorPrintFunc( SquirrelVM vm, string s )
+    protected static void ErrorPrintFunc( SQVM vm, string s )
     {
 
     }
@@ -98,7 +98,7 @@ public class Squirrel
     /// <summary>
     /// Get the squirrel VM. Try to avoid doing this.
     /// </summary>
-    public SquirrelVM GetVM()
+    public SQVM GetVM()
     {
         return vm;
     }
@@ -113,7 +113,7 @@ public class Squirrel
 
     }
 
-    public bool LoadScript( SquirrelVM vm, string script, bool inRoot = true )
+    public bool LoadScript( SQVM vm, string script, bool inRoot = true )
     {
 
     }
@@ -121,7 +121,7 @@ public class Squirrel
     /// <summary>
     /// Load a file to a given VM.
     /// </summary>
-    public SQResult LoadFile( SquirrelVM vm, string filename, SQBool printError )
+    public SQResult LoadFile( SQVM vm, string filename, SQBool printError )
     {
 
     }

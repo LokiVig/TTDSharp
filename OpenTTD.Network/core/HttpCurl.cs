@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace OpenTTD.Network.Core;
 
-public static partial class NetworkCore
+public static partial class Core
 {
     /// <summary>
     /// List of certificate bundles, depending on OS. Taken from: https://golang.org/src/crypto/x509/root_unix.go
@@ -67,17 +67,17 @@ public class NetworkHTTPRequest
         this.callback = new HTTPThreadSafeCallback( callback );
         this.data = data;
 
-        lock ( NetworkCore.newHttpCallbackMutex )
+        lock ( Core.newHttpCallbackMutex )
         {
-            NetworkCore.newHttpCallbacks.Add( this.callback );
+            Core.newHttpCallbacks.Add( this.callback );
         }
     }
 
     ~NetworkHTTPRequest()
     {
-        lock ( NetworkCore.httpCallbackMutex )
+        lock ( Core.httpCallbackMutex )
         {
-            NetworkCore.httpCallbacks.Remove( callback );
+            Core.httpCallbacks.Remove( callback );
         }
     }
 }

@@ -68,7 +68,7 @@ public class NetworkSocketHandler
     }
 }
 
-public static partial class NetworkCore
+public static partial class Core
 {
     /// <summary>
     /// Initializes the network core (as that is needed for some platforms)

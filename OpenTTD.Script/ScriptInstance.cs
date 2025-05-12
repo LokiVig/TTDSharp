@@ -476,7 +476,7 @@ public class ScriptInstance
             return;
         }
 
-        SquirrelVM vm = engine.GetVM();
+        SQVM vm = engine.GetVM();
 
         if ( isSaveDataOnStack )
         {
@@ -606,7 +606,7 @@ public class ScriptInstance
     public void Pause()
     {
         // Suspend script
-        SquirrelVM vm = engine.GetVM();
+        SQVM vm = engine.GetVM();
         Squirrel.DecreaseOps( vm, settingsGame.script.scriptMaxOpcodeTillSuspend );
 
         isPaused = true;
@@ -803,7 +803,7 @@ public class ScriptInstance
     /// <param name="maxDepth">The maximum depth of recursive arrays / tables will be stored with before an error is returned.</param>
     /// <param name="test">If <see langword="true"/>, don't really store the data but only check if it is valid.</param>
     /// <returns><see langword="true"/> if the saving was successful.</returns>
-    private static bool SaveObject( SquirrelVM vm, SQInteger index, int maxDepth, bool test )
+    private static bool SaveObject( SQVM vm, SQInteger index, int maxDepth, bool test )
     {
         if ( maxDepth == 0 )
         {
@@ -859,7 +859,7 @@ public class ScriptInstance
     }
 
     /// <inheritdoc cref="LoadObjects(ScriptData)"/>
-    private static bool LoadObjects( SquirrelVM vm, ScriptData data )
+    private static bool LoadObjects( SQVM vm, ScriptData data )
     {
 
     }

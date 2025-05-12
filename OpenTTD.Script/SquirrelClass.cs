@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace OpenTTD.Script;
 
@@ -7,15 +8,15 @@ namespace OpenTTD.Script;
 /// and calling of such classes, to minimize the API layer.
 /// </summary>
 /// <typeparam name="CL">The class to define.</typeparam>
-/// <typeparam name="ST">The <see cref="ScriptType"/> of the class to define.</typeparam>
-public class DefSQClass<CL, ST>
+public class DefSQClass<CL>
     where CL : class
-    where ST : unmanaged, Enum
 {
+    private ScriptType type;
     private string classname;
 
-    public DefSQClass( string classname )
+    public DefSQClass( ScriptType type, string classname )
     {
+        this.type = type;
         this.classname = classname;
     }
 
@@ -33,12 +34,15 @@ public class DefSQClass<CL, ST>
     /// <summary>
     /// This defines a method inside a class for Squirrel, which has access to the 'engine' (experts only!).
     /// </summary>
-    public void DefSQAdvancedMethod<Func>( Squirrel engine, Func functionProc, string functionName )
+    public void DefSQAdvancedMethod<Ret>( Squirrel engine, Func<Ret> functionProc, string functionName )
     {
-        unsafe
-        {
-            engine.AddMethod( functionName, Script.DefSQAdvancedNonStaticCallback<CL, Func, ST>, 0, null, functionProc, sizeof( Func ) );
-        }
+        engine.AddMethod( functionName, Script.DefSQAdvancedNonStaticCallback<CL>, 0, null, functionProc );
+    }
+
+    /// <inheritdoc cref="DefSQAdvancedMethod{T}(Squirrel, Func{T}, string)"/>
+    public void DefSQAdvancedMethod<Var1, Ret>( Squirrel engine, Func<Var1, Ret> functionProc, string functionName )
+    {
+        engine.AddMethod( functionName, Script.DefSQAdvancedNonStaticCallback<CL>, 0, null, functionProc );
     }
 
     /// <summary>
@@ -106,9 +110,9 @@ public class DefSQClass<CL, ST>
         engine.AddClassBegin( classname, parentClass );
     }
 
-    public void AddConstructor<Func>( Squirrel engine, int nParams, string sParams )
+    public void AddConstructor( Squirrel engine, int nParams, string sParams )
     {
-        engine.AddMethod( "constructor", Script.DefSQConstructorCallback < CL, Func, typeof( int ) >, nParams, sParams );
+        engine.AddMethod( "constructor", Script.DefSQConstructorCallback<CL>, nParams, sParams );
     }
 
     public void AddSQAdvancedConstructor( Squirrel engine )

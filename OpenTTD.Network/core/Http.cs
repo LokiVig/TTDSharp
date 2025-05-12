@@ -46,15 +46,15 @@ public class NetworkHTTPSocketHandler
     /// <param name="data">The data we want to send. When non-empty, this will be a POST request, otherwise a GET request.</param>
     public static void Connect( string uri, ref HTTPCallback callback, string data = "" )
     {
-        if ( string.IsNullOrEmpty( NetworkCore.httpCaFile ) && string.IsNullOrEmpty( NetworkCore.httpCaPath ) )
+        if ( string.IsNullOrEmpty( Core.httpCaFile ) && string.IsNullOrEmpty( Core.httpCaPath ) )
         {
             callback.OnFailure();
             return;
         }
 
-        lock ( NetworkCore.httpMutex )
+        lock ( Core.httpMutex )
         {
-            NetworkCore.httpRequests.Enqueue( new NetworkHTTPRequest( uri, callback, data ) );
+            Core.httpRequests.Enqueue( new NetworkHTTPRequest( uri, callback, data ) );
         }
     }
 
@@ -63,27 +63,27 @@ public class NetworkHTTPSocketHandler
     /// </summary>
     public static void HTTPReceive()
     {
-        lock ( NetworkCore.httpCallbackMutex )
+        lock ( Core.httpCallbackMutex )
         {
-            lock ( NetworkCore.newHttpCallbackMutex )
+            lock ( Core.newHttpCallbackMutex )
             {
-                if ( NetworkCore.newHttpCallbacks.Count != 0 )
+                if ( Core.newHttpCallbacks.Count != 0 )
                 {
                     // We delay adding new callbacks, as HandleQueue() below might add a new callback
-                    NetworkCore.httpCallbacks.Insert( NetworkCore.httpCallbacks.Count, NetworkCore.newHttpCallbacks[0] );
-                    NetworkCore.newHttpCallbacks.Clear();
+                    Core.httpCallbacks.Insert( Core.httpCallbacks.Count, Core.newHttpCallbacks[0] );
+                    Core.newHttpCallbacks.Clear();
                 }
             }
         }
 
-        foreach ( HTTPThreadSafeCallback callback in NetworkCore.httpCallbacks )
+        foreach ( HTTPThreadSafeCallback callback in Core.httpCallbacks )
         {
             callback.HandleQueue();
         }
     }
 }
 
-public static partial class NetworkCore
+public static partial class Core
 {
     /// <summary>
     /// Initialize the HTTP socket handler.

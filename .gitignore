@@ -9,4 +9,4 @@ build/*
 *.pubxml
 
 # Ignore intermediate files
-OpenTTD/obj/*
+*/obj/*

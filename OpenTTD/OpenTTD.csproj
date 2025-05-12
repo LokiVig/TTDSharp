@@ -4,5 +4,16 @@
     <OutputType>Exe</OutputType>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+    <BaseOutputPath>$(SolutionDir)build</BaseOutputPath>
   </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OpenTTD.AI\OpenTTD.AI.csproj" />
+    <ProjectReference Include="..\OpenTTD.Blitter\OpenTTD.Blitter.csproj" />
+    <ProjectReference Include="..\OpenTTD.Core\OpenTTD.Core.csproj" />
+    <ProjectReference Include="..\OpenTTD.Network\OpenTTD.Network.csproj" />
+    <ProjectReference Include="..\OpenTTD.OS\OpenTTD.OS.csproj" />
+    <ProjectReference Include="..\OpenTTD.Pathfinder\OpenTTD.Pathfinder.csproj" />
+    <ProjectReference Include="..\OpenTTD.Script\OpenTTD.Script.csproj" />
+    <ProjectReference Include="..\OpenTTD.SpriteLoader\OpenTTD.SpriteLoader.csproj" />
+  </ItemGroup>
 </Project>

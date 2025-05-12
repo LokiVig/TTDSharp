@@ -95,7 +95,7 @@ public class NetworkError
     }
 }
 
-public static partial class NetworkCore
+public static partial class Core
 {
     /// <summary>
     /// Emscripten doesn't get 'addrlen' for accept(), getsockname(), getpeername()<br/>

@@ -173,7 +173,7 @@ public struct ContentInfo
             return string.Empty;
         }
 
-        return GetTextFile( type, NetworkCore.GetContentInfoSubDir( type ), tmp );
+        return GetTextFile( type, Core.GetContentInfoSubDir( type ), tmp );
     }
 }
 
@@ -391,7 +391,7 @@ public class NetworkContentSocketHandler : NetworkTCPSocketHandler
     }
 }
 
-public static partial class NetworkCore
+public static partial class Core
 {
     /// <summary>
     /// Helper to get the subdirectory a <see cref="ContentInfo"/> is located in.
